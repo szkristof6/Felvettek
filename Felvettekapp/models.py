@@ -21,5 +21,19 @@ class Lista(models.Model):
     def __str__(self):
         return f"{self.om_azonosito} {self.nev}"
 
+    def beolvas():
+        print("beolvas")
+
+    def kereses(json):
+        try:
+            query = Lista.objects.filter(om_azonosito=json['om_azonosito'])
+            if not list(query):
+                return 'nem talált om_azonosito'
+            else:
+                return True
+        except ValueError:
+            return ValueError
+
+
 
 # Create your models here.
