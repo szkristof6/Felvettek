@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kezdés</title>
+
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'style.css'%} ">
+
 </head>
+
 <body>
-    <h1>Szia</h1>
+    <div class="card">
+        <div class="fejlec">
+            <h1>Szent László Gimnázium felvettek kereső</h1>
+        </div>
+        <div class="body">
+            <form method="POST">
+                {% csrf_token %}
+                <input type="number" name="om_azonosito" placeholder="OM-Azonosító">
+                <button class="gomb zold">Küldés</button>
+            </form>
+        </div>
+    </div>
 </body>
+<script src="{% static 'index.js'%} "></script>
+
 </html>

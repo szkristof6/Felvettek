@@ -1,0 +1,116 @@
+@import url(https://fonts.googleapis.com/css?family=Josefin+Sans);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu);
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+
+.card {
+    width: 60%;
+    margin: 0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 3px 20px 0 rgb(0 0 0 / 10%);
+    -webkit-box-shadow: 0 3px 20px 0 rgb(0 0 0 / 10%);
+}
+
+.fejlec {
+    background-color: #57b846;
+    color: white;
+    font-family: Josefin Sans;
+    line-height: 1.2;
+    padding: 3em 2em;
+}
+
+h1 {
+    font-size: 2.5em;
+    text-align: center;
+}
+
+.body {
+    padding: 3em;
+}
+
+input {
+    font-family: Ubuntu;
+    font-size: 1.3em;
+    color: #1b3815;
+    width: 80%;
+    display: block;
+    line-height: 1.2;
+    height: 4em;
+    background: #ebebeb;
+    border-radius: 27px;
+    padding: 0 35px;
+    margin: 0 auto;
+    outline: none;
+    border: none;
+    overflow: visible;
+    font-weight: bold;
+}
+
+input:focus {
+    width: 85%;
+    transition: all .4s;
+}
+
+button {
+    outline: none !important;
+    border: none;
+    background: 0 0;
+}
+
+.gomb {
+    margin: 2em auto;
+    width: 80%;
+    height: 50px;
+    background-color: #57b846;
+    border-radius: 25px;
+    display: block;
+    font-family: Ubuntu;
+    font-size: 1em;
+    font-weight: bold;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.zold {
+    background: #57b846;
+    -webkit-transition: background .4s;
+    -o-transition: background .4s;
+    -moz-transition: background .4s;
+    transition: background .4s;
+}
+
+.zold:hover,
+.zold:focus {
+    background: #1b3815;
+    -webkit-transition: all .4s;
+    -o-transition: all .4s;
+    -moz-transition: all .4s;
+    transition: all .4s;
+}
+
+@media (max-width: 800px) {
+    .card {
+        width: 95%;
+    }
+}
