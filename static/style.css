@@ -44,6 +44,11 @@ h1 {
     text-align: center;
 }
 
+a{
+    text-decoration: none;
+    color:inherit
+}
+
 .body {
     padding: 3em;
 }
@@ -107,6 +112,53 @@ button {
     -o-transition: all .4s;
     -moz-transition: all .4s;
     transition: all .4s;
+}
+
+.header{
+    display: grid;
+    grid-template-areas:
+        "nev om_azonosito";
+    text-align: center;
+}
+
+.om_azonosito{
+    grid-area: om_azonosito;
+    font-family: Josefin Sans;
+    font-size: 2em;
+}
+
+.nev{
+    grid-area: nev;
+    font-family: Josefin Sans;
+    font-size: 2em;
+}
+
+.elem{
+    width: 88%;
+    display: block;
+    margin: 0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 3px 20px 0 rgb(0 0 0 / 10%);
+    -webkit-box-shadow: 0 3px 20px 0 rgb(0 0 0 / 10%);
+    margin: 2em 0;
+    padding: 2em;
+    display: grid;
+    grid-template-areas:
+        "tagozat dontes";
+    text-align: center;
+}
+
+.tagozat{
+    grid-area: tagozat;
+    font-family: Josefin Sans;
+    font-size: 2em;
+}
+
+.dontes{
+    grid-area: dontes;
+    font-family: Josefin Sans;
+    font-size: 2em;
 }
 
 @media (max-width: 800px) {

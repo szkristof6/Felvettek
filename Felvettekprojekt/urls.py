@@ -14,12 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 
-from Felvettekapp.views import index, kereses
+from Felvettekapp.views import index, kereses, lekerdezes
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
-    path('kereses/', kereses)
+    path('kereses/', kereses),
+    re_path(r'^lekerdezes/(?P<om_azonosito>\w{0,50})/$', lekerdezes),
 ]

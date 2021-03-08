@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import json
 from ratelimit.decorators import ratelimit
@@ -34,5 +34,21 @@ def kereses(request, *args, **kwargs):
         }
 
     return JsonResponse(data)
+
+def lekerdezes(request, om_azonosito, *args, **kwargs):
+    if(Lista.protection(om_azonosito)):
+        got_data = Lista.get_data(om_azonosito)
+        lista = []
+
+        for elem in got_data:
+            array = {
+                "tagozat": elem.tagozat,
+                "dontes": elem.dontes
+            }
+            lista.append(array)
+
+        return render(request, "lekerdezes.html", {"om_azonosito": got_data[0].om_azonosito, "nev": got_data[0].nev, "adatok": lista})
+    else:
+        return redirect("/")
 
 # Create your views here.

@@ -1,6 +1,5 @@
 from django.db import models
 import uuid
-from uuid import UUID
 import datetime
 from datetime import datetime
 
@@ -23,6 +22,18 @@ class Lista(models.Model):
 
     def beolvas():
         print("beolvas")
+
+    def protection(om_azonosito):
+        try:
+            query = Lista.objects.filter(om_azonosito=om_azonosito)
+            if query.count() > 0:
+                return True
+        except ValueError:
+            return False
+
+    def get_data(om_azonosito):
+        response = list(Lista.objects.filter(om_azonosito=om_azonosito))
+        return response
 
     def kereses(json):
         try:

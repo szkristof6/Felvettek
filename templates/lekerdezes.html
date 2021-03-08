@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lekérdezés</title>
+
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'style.css'%} ">
+</head>
+<body>
+    <div class="card">
+        <div class="fejlec">
+            <a href="/"><h1>Szent László Gimnázium felvettek kereső</h1></a>
+        </div>
+        <div class="body">
+            <div class="header">
+                <span class="nev">{{nev}}</span>
+                <span class="om_azonosito">{{om_azonosito}}</span>
+            </div>
+            {% for adat in adatok %}
+                <div class="elem">
+                    <span class="tagozat">{{adat.tagozat}}</span>
+                    <span class="dontes">{{adat.dontes}}</span>
+                </div>
+             {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
