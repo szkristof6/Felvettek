@@ -16,11 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 
-from Felvettekapp.views import index, kereses, lekerdezes
+from Felvettekapp.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
-    path('kereses/', kereses),
-    re_path(r'^lekerdezes/(?P<om_azonosito>\w{0,50})/$', lekerdezes),
 ]

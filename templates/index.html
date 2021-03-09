@@ -22,8 +22,27 @@
             <form method="POST">
                 {% csrf_token %}
                 <input type="number" name="om_azonosito" placeholder="OM-Azonosító">
-                <button class="gomb zold" >Küldés</button>
+                <button class="gomb zold">Küldés</button>
             </form>
+        </div>
+    </div>
+    <div id="massage" class="modal">
+        <div class="modal-content piros">
+            <div class="modal-body">
+                <p />
+            </div>
+        </div>
+    </div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="fejlec">
+                <div class="header">
+                    <span class="nev"></span>
+                    <span class="om_azonosito"></span>
+                </div>
+            </div>
+            <div class="body">
+            </div>
         </div>
     </div>
 </body>

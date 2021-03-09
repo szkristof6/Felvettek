@@ -3,6 +3,7 @@ import uuid
 import datetime
 from datetime import datetime
 
+
 class Lista(models.Model):
     id = models.CharField(
         primary_key=True, default=uuid.uuid4, editable=False, unique=True, max_length=32)
@@ -11,7 +12,7 @@ class Lista(models.Model):
     tagozat = models.CharField(max_length=2)
     dontes = models.CharField(max_length=5)
     date = models.DateField()
-    
+
     class Meta:
         verbose_name = 'Elem'
         verbose_name_plural = 'Lista'
@@ -21,30 +22,21 @@ class Lista(models.Model):
         return f"{self.om_azonosito} {self.nev}"
 
     def beolvas():
-        print("beolvas")
-
-    def protection(om_azonosito):
-        try:
-            query = Lista.objects.filter(om_azonosito=om_azonosito)
-            if query.count() > 0:
-                return True
-        except ValueError:
-            return False
-
-    def get_data(om_azonosito):
-        response = list(Lista.objects.filter(om_azonosito=om_azonosito))
-        return response
+        with open('felvettek.tsv', 'r') as f:
+            for t in f.readlines():
+                tan = t.split('\t')
+                Lista.objects.create(
+                    om_azonosito=tan[0], nev=tan[1], tagozat=tan[2], dontes=tan[3], date=datetime.now())
 
     def kereses(json):
         try:
             query = Lista.objects.filter(om_azonosito=json['om_azonosito'])
             if not list(query):
-                return 'nem talált om_azonosito'
+                return {"response": 'nem talált om_azonosito'}
             else:
-                return True
+                return {"response": True, "lista": list(query)}
         except ValueError:
-            return ValueError
-
+            return {"response": ValueError}
 
 
 # Create your models here.

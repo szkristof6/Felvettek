@@ -5,8 +5,41 @@ from ratelimit.decorators import ratelimit
 
 from .models import Lista
 
-
+@ratelimit(key='ip', rate='5/m')
 def index(request, *args, **kwargs):
+    if request.method == "POST":
+        array = json.load(request)
+
+        if not getattr(request, 'limited', False):
+            response = Lista.kereses(array)
+            if response["response"] == True:
+                lista = []
+                for elem in response["lista"]:
+                    array = {
+                        "om_azonosito": elem.om_azonosito,
+                        "nev": elem.nev,
+                        "tagozat": elem.tagozat,
+                        "dontes": elem.dontes
+                    }
+                    lista.append(array)
+                data = {
+                    "massage": "OK",
+                    "lista": lista
+                }
+            elif response["response"] == "nem talált om_azonosito":
+                data = {
+                    "massage": "Nem található ilyen OM-Azonosító!"
+                }
+            else:
+                data = {
+                    "massage": response["response"]
+                }
+        else:
+            data = {
+                "massage": "Túl sok kérelem érkezett! Várj egy kicsit!"
+            }
+
+        return JsonResponse(data)
     return render(request, "index.html", {})
 
 
@@ -16,17 +49,28 @@ def kereses(request, *args, **kwargs):
 
     if not getattr(request, 'limited', False):
         response = Lista.kereses(array)
-        if response == True:
+        if response["response"] == True:
+            lista = []
+
+            for elem in response["lista"]:
+                array = {
+                    "om_azonosito": elem.om_azonosito,
+                    "nev": elem.nev,
+                    "tagozat": elem.tagozat,
+                    "dontes": elem.dontes
+                }
+                lista.append(array)
             data = {
-                "massage": "OK"
+                "massage": "OK",
+                "lista": lista
             }
-        elif response == "nem talált om_azonosito":
+        elif response["response"] == "nem talált om_azonosito":
             data = {
                 "massage": "Nem található ilyen OM-Azonosító!"
             }
         else:
             data = {
-                "massage": response
+                "massage": response["response"]
             }
     else:
         data = {
@@ -34,6 +78,7 @@ def kereses(request, *args, **kwargs):
         }
 
     return JsonResponse(data)
+
 
 def lekerdezes(request, om_azonosito, *args, **kwargs):
     if(Lista.protection(om_azonosito)):

@@ -23,7 +23,7 @@ body {
 }
 
 .card {
-    width: 60%;
+    width: 50%;
     margin: 0 auto;
     border-radius: 20px;
     overflow: hidden;
@@ -44,13 +44,13 @@ h1 {
     text-align: center;
 }
 
-a{
+a {
     text-decoration: none;
-    color:inherit
+    color: inherit
 }
 
 .body {
-    padding: 3em;
+    margin: 4em auto 
 }
 
 input {
@@ -83,7 +83,7 @@ button {
 }
 
 .gomb {
-    margin: 2em auto;
+    margin: 3em auto;
     width: 80%;
     height: 50px;
     background-color: #57b846;
@@ -105,8 +105,8 @@ button {
     transition: background .4s;
 }
 
-.zold:hover,
-.zold:focus {
+form>.zold:hover,
+form>.zold:focus {
     background: #1b3815;
     -webkit-transition: all .4s;
     -o-transition: all .4s;
@@ -114,34 +114,44 @@ button {
     transition: all .4s;
 }
 
-.header{
+.piros {
+    background: #bb4d4d;
+    -webkit-transition: background .4s;
+    -o-transition: background .4s;
+    -moz-transition: background .4s;
+    transition: background .4s;
+}
+
+.header {
     display: grid;
     grid-template-areas:
-        "nev om_azonosito";
+        "nev" 
+        "om_azonosito";
     text-align: center;
+    font-size: 1em;
+    font-weight: bold;
 }
 
-.om_azonosito{
-    grid-area: om_azonosito;
-    font-family: Josefin Sans;
-    font-size: 2em;
-}
-
-.nev{
+.nev {
     grid-area: nev;
     font-family: Josefin Sans;
-    font-size: 2em;
+    font-size: 2.7em;
+    margin-bottom: .5em;
 }
 
-.elem{
-    width: 88%;
-    display: block;
-    margin: 0 auto;
+.om_azonosito {
+    grid-area: om_azonosito;
+    font-family: Josefin Sans;
+    font-size: 1.6em;
+}
+
+.elem {
+    width: 80%;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 3px 20px 0 rgb(0 0 0 / 10%);
     -webkit-box-shadow: 0 3px 20px 0 rgb(0 0 0 / 10%);
-    margin: 2em 0;
+    margin: 1.5em auto;
     padding: 2em;
     display: grid;
     grid-template-areas:
@@ -149,16 +159,107 @@ button {
     text-align: center;
 }
 
-.tagozat{
+.tagozat {
     grid-area: tagozat;
     font-family: Josefin Sans;
     font-size: 2em;
 }
 
-.dontes{
+.dontes {
     grid-area: dontes;
     font-family: Josefin Sans;
     font-size: 2em;
+}
+
+#massage>.modal-content {
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+    color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 30%;
+    border-radius: 5px;
+
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s
+}
+
+#massage>.modal-body {
+    padding: 2px 16px;
+}
+
+#massage>.modal-content>.modal-body>p {
+    margin: 1em;
+    font-size: 1.2em;
+    font-family: Ubuntu;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    -webkit-animation-name: fadeIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s
+}
+
+#modal {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding-top: 100px;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+#modal>.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    border: 1px solid #888;
+    border-radius: 20px;
+    width: 60%;
+}
+
+.modal-content>.fejlec{
+    border-radius: 20px 20px 0 0;
+}
+
+#modal>.modal-content>.modal-body>p {
+    grid-area: title;
+    font-size: 1.2em;
+    margin: 1em 1em 3em 1em;
+
+}
+
+@-webkit-keyframes slideIn {
+    from {
+        bottom: -300px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 1em;
+        right: 1em;
+        opacity: 1,
+    }
+}
+
+@keyframes slideIn {
+    from {
+        bottom: -300px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 1em;
+        right: 1em;
+        opacity: 1
+    }
 }
 
 @media (max-width: 800px) {

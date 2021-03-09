@@ -1,5 +1,16 @@
+function massage_show(text) {
+    const massage = document.querySelector("#massage");
+
+    massage.querySelector('p').innerText = text;
+    massage.style.display = "block";
+
+    setTimeout(() => {
+        massage.style.display = "none";
+    }, 5 * 1000);
+}
+
 function hitelesit(input) {
-	return input.toString().replace(/&/g, ' ').replace(/</g, ' ').replace(/>/g, ' ').replace(/"/g, ' ').trim()
+    return input.toString().replace(/&/g, ' ').replace(/</g, ' ').replace(/>/g, ' ').replace(/"/g, ' ').trim()
 }
 
 const form = document.querySelector("form");
@@ -11,25 +22,65 @@ form.addEventListener("submit", (event) => {
     const om_azonosito = parseInt(hitelesit(formData.get("om_azonosito")));
     const csrftoken = hitelesit(formData.get('csrfmiddlewaretoken'));
 
-    if(!isNaN(om_azonosito) && csrftoken !== ""){
+    if (!isNaN(om_azonosito) && csrftoken !== "") {
         const json = {
             om_azonosito
         }
 
-        fetch("/kereses/", {
-            method: "POST",
-            body: JSON.stringify(json),
-            headers: {
-                'Accept': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRFToken': csrftoken
-            },
-            credentials: 'same-origin'
-        }).then(response => response.json())
-        .then((data) => {
-            console.log(data);
-        })
+        fetch("./", {
+                method: "POST",
+                body: JSON.stringify(json),
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': csrftoken
+                },
+                credentials: 'same-origin'
+            }).then(response => response.json())
+            .then((data) => {
+                form.reset()
+                if (data.massage === "OK") {
+                    const {
+                        lista
+                    } = data;
+                    console.log(lista);
+                    const modal = document.querySelector("#modal");
+
+                    window.onclick = (event) => {
+                        if (event.target == modal) {
+                            modal.style.display = "none";
+                        }
+                    }
+
+                    modal.querySelector(".nev").innerText = lista[0].nev;
+                    modal.querySelector(".om_azonosito").innerText = `OM-Azonosító: ${lista[0].om_azonosito}`;
+
+                    const body = modal.querySelector(".body");
+
+                    lista.forEach(adat => {
+                        const elem = document.createElement("div");
+                        elem.setAttribute("class", `elem ${adat.dontes === "igen" ? "zold" : "piros"}`);
+
+                        const tagozat = document.createElement("span");
+                        tagozat.appendChild(document.createTextNode(adat.tagozat));
+                        tagozat.setAttribute("class", "tagozat");
+                        elem.appendChild(tagozat);
+
+                        const dontes = document.createElement("span");
+                        dontes.appendChild(document.createTextNode(adat.dontes));
+                        dontes.setAttribute("class", "dontes");
+                        elem.appendChild(dontes);
+
+                        body.appendChild(elem);
+                    });
+
+                    modal.setAttribute("style", "display: block;")
+
+                } else {
+                    massage_show(data.massage)
+                }
+            })
     } else {
-        console.log("ures");
+        massage_show("Add meg az OM-Azonosítót!")
     }
 })
