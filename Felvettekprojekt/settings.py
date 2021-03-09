@@ -27,7 +27,7 @@ SECRET_KEY = 'uhj5#th_kad9)rgj=-h7wsp5pr4zqh63#pfw5#te3r8!*gk07k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['felvettek-szlg.herokuapp.com', 'localhost']
 
 # Application definition
 
