@@ -5,6 +5,8 @@ from datetime import datetime
 
 
 class Lista(models.Model):
+    id = models.UUIDField(
+        primary_key=True, default=uuid.uuid4, editable=False)
     om_azonosito = models.CharField(max_length=11)
     nev = models.CharField(max_length=100)
     tagozat = models.CharField(max_length=2)
