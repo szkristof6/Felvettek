@@ -19,11 +19,11 @@ form.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const formData = new FormData(form);
-    const om_azonosito = parseInt(hitelesit(formData.get("om_azonosito")));
+    const om_azonosito = hitelesit(formData.get("om_azonosito"));
     const csrftoken = hitelesit(formData.get('csrfmiddlewaretoken'));
 
     if (!isNaN(om_azonosito) && csrftoken !== "") {
-        if (om_azonosito.toString().length === 11 && om_azonosito.toString()[0]==="7") {
+        if (om_azonosito.length === 11 && om_azonosito[0]==="7") {
             const json = {
                 om_azonosito
             }

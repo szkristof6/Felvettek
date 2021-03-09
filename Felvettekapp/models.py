@@ -7,7 +7,7 @@ from datetime import datetime
 class Lista(models.Model):
     id = models.CharField(
         primary_key=True, default=uuid.uuid4, editable=False, unique=True, max_length=32)
-    om_azonosito = models.IntegerField()
+    om_azonosito = models.CharField(max_length=11)
     nev = models.CharField(max_length=100)
     tagozat = models.CharField(max_length=2)
     dontes = models.CharField(max_length=5)
@@ -27,7 +27,7 @@ class Lista(models.Model):
                 tan = t.split('\t')
                 if tan[0] and tan[1] and tan[2] and tan[3] and len(str(tan[0])) == 11 and str(tan[0])[0] == "7":
                     Lista.objects.create(
-                        om_azonosito=tan[0], nev=tan[1], tagozat=tan[2], dontes=tan[3], date=datetime.now())
+                        om_azonosito=str(tan[0]), nev=str(tan[1]), tagozat=str(tan[2]), dontes=str(tan[3]), date=datetime.now())
 
     def kereses(json):
         try:
