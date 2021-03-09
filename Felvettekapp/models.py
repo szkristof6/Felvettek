@@ -25,8 +25,9 @@ class Lista(models.Model):
         with open('felvettek.tsv', 'r') as f:
             for t in f.readlines():
                 tan = t.split('\t')
-                Lista.objects.create(
-                    om_azonosito=tan[0], nev=tan[1], tagozat=tan[2], dontes=tan[3], date=datetime.now())
+                if tan[0] and tan[1] and tan[2] and tan[3] and len(str(tan[0])) == 11 and str(tan[0])[0] == "7":
+                    Lista.objects.create(
+                        om_azonosito=tan[0], nev=tan[1], tagozat=tan[2], dontes=tan[3], date=datetime.now())
 
     def kereses(json):
         try:
